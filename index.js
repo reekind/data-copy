@@ -23,11 +23,18 @@ const clipboards = new Map();
 let data = "";
 
 app.get('/api/clipboards/:id', function (req, res) {
-    res.send(JSON.stringify({text: data}));
+  if (clipboards.has(req.params.id)) {
+    res.send(JSON.stringify({text: clipboards.get(req.params.id)}));
+  } else {
+    res.statusCode = 404;
+    res.send(JSON.stringify({
+      error: "This clipboard does not exist"
+    }));
+  }
 });
 app.post('/api/clipboards/:id', function (req, res) {
     console.log(req.body);
-    clipboards.set(req.params.id);
+    clipboards.set(req.params.id, req.body.text);
     data = req.body.text;
     res.send({params: req.params, body: req.body});
 });
