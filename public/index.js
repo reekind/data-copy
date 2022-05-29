@@ -7,3 +7,16 @@ document.getElementById('openExistingButton').addEventListener('click', () => {
         alert("no id given");
     }
 });
+
+document.getElementById('addButton').addEventListener('click', () => {
+    fetch('/api/clipboards', {
+        method: 'POST'
+    }).then((res) => {
+        return res.json();
+    }).then((json) => {
+        window.location.href = '/clipboard.html?id=' + json.id;
+    }).catch((reason) => {
+        alert(reason);
+    });
+});
+

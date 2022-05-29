@@ -2,18 +2,29 @@
   "name": "data-copy",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "out/index.js",
+  "engines": {
+    "node": ">=14.16"
+  },
   "dependencies": {
     "express": "^4.17.2",
-    "nodemon": "^2.0.15",
     "socket.io": "^4.4.1"
   },
   "devDependencies": {
-    "jest": "^28.1.0"
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^27.5.1",
+    "@types/node": "^17.0.35",
+    "jest": "^28.1.0",
+    "nodemon": "^2.0.15",
+    "ts-jest": "^28.0.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^4.7.2"
   },
   "scripts": {
-    "test": "jest",
-    "serve": "node index.js"
+    "test": "tsc && jest --coverage",
+    "serve": "tsc && node out/index.js",
+    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
   },
   "author": "",
   "license": "ISC"

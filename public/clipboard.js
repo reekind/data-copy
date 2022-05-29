@@ -1,23 +1,23 @@
 const queryString = window.location.search;
-      const urlParams = new URLSearchParams(queryString);
-      const clipboardId = urlParams.get('id');
-      
-      document.getElementById('clipboardTitle').innerText = 'Clipboard ' + clipboardId;
-      
-      fetch('/api/clipboards/' + clipboardId)
-      .then(res => {
-          if (res.ok) {
-            return res.json();
-          }
-          throw new Error("Not found!");
-      })
-      .then((res) => {
-            console.log(res);
-            document.getElementById('text').value = res.text;
-        })
-        .catch((reason) => {
-            alert(reason);
-        });
+const urlParams = new URLSearchParams(queryString);
+const clipboardId = urlParams.get('id');
+
+document.getElementById('clipboardTitle').innerText = 'Clipboard ' + clipboardId;
+
+fetch('/api/clipboards/' + clipboardId)
+.then(res => {
+    if (res.ok) {
+    return res.json();
+    }
+    throw new Error("Not found!");
+})
+.then((res) => {
+    console.log(res);
+    document.getElementById('text').value = res._text;
+})
+.catch((reason) => {
+    alert(reason);
+});
 
 
 const socket = io();
@@ -39,8 +39,8 @@ socket.on('clipboard:update', function (data) {
 document.getElementById('save').addEventListener('click', () => {
     const clipboardContent = document.getElementById('text').value;
     fetch('/api/clipboards/' + clipboardId, {
-        method: 'POST',
-        body: JSON.stringify({ text: clipboardContent }),
+        method: 'PUT',
+        body: JSON.stringify({ id: clipboardId, text: clipboardContent }),
         headers: {
             'Content-Type': 'application/json'
         }
