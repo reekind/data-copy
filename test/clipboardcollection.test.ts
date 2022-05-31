@@ -20,8 +20,7 @@ test('changing works',  () => {
   const updatedClipboard = clipboards.get(clipboard.id);
   expect(updatedClipboard.text).toBe(text);
 });
-
 test('changing not existing fails',  () => {
   const text = "1234TEST$%&/(/&%$§$%&/";
-  expect(clipboards.update("NOTEXISTING", text)).toThrowError();
+  expect(() => {clipboards.update("NOTEXISTING", text)}).toThrow(Error);
 });

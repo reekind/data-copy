@@ -17,7 +17,6 @@ export class ClipboardPersistence {
 
     save(data: ClipboardCollection) {
         const jsonString = data.toJSON();
-        console.log(jsonString);
         return writeFileSync(this.filePath, jsonString);
     }
 

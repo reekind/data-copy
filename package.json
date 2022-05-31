@@ -2,7 +2,7 @@
   "name": "data-copy",
   "version": "1.0.0",
   "description": "",
-  "main": "out/index.js",
+  "main": "out/server.js",
   "engines": {
     "node": ">=14.16"
   },
@@ -24,8 +24,8 @@
   "scripts": {
     "test": "tsc && jest --coverage",
     "build": "tsc",
-    "serve": "tsc && node out/index.js",
-    "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
+    "serve": "tsc && node out/server.js",
+    "dev": "ts-node-dev --respawn --pretty --transpile-only src/server.ts"
   },
   "author": "",
   "license": "ISC"
