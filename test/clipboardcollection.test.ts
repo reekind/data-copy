@@ -1,6 +1,6 @@
 import {ClipboardCollection} from "../out/ClipboardCollection";
 
-const clipboards: ClipboardCollection = new ClipboardCollection();
+const clipboards: ClipboardCollection = ClipboardCollection.init();
 
 test('create new', () => {
     const clipboard = clipboards.new();
