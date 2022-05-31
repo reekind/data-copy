@@ -30,14 +30,18 @@ export class ClipboardPersistence {
         });
     }*/
 
-    read() :Map<String, Clipboard> {
-        const data = readFileSync(this.filePath);
-        const jsonString = data.toString();
-        const jsonObject = JSON.parse(jsonString);
-        const map = new Map<String, Clipboard>();
-        for(let value in jsonObject) {
-            map.set(value, jsonObject[value]);
+    read() : Map<String, Clipboard> {
+        try {
+            const data = readFileSync(this.filePath);
+            const jsonString = data.toString();
+            const jsonObject = JSON.parse(jsonString);
+            const map = new Map<String, Clipboard>();
+            for(let value in jsonObject) {
+                map.set(value, jsonObject[value]);
+            }
+            return map;
+        } catch (error) {
+            return new Map<String, Clipboard>();
         }
-        return map;
     }
 }

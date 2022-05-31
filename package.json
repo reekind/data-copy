@@ -23,6 +23,7 @@
   },
   "scripts": {
     "test": "tsc && jest --coverage",
+    "build": "tsc",
     "serve": "tsc && node out/index.js",
     "dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
   },
