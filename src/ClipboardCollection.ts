@@ -7,7 +7,6 @@ export class ClipboardCollection {
     constructor(persistence: ClipboardPersistence, clipboards: Map<String, Clipboard>) {
         this.clipboards = clipboards;
         this.persistence = persistence
-    
     }
 
     static init() {
@@ -26,11 +25,7 @@ export class ClipboardCollection {
             return false;
         }
     }
-
-    add(id: string) {
-        this.clipboards.set(id, new Clipboard(id));
-    }
-
+    
     new() {
         const rand = Math.random().toString(16).substr(2, 8);
         const newClipboard = new Clipboard(rand);

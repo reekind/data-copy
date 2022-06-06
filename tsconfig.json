@@ -5,6 +5,7 @@
       "allowSyntheticDefaultImports": true,
       "allowJs": true,
       "target": "ES2017",
+      "sourceMap": true,
       "moduleResolution": "node",
       "esModuleInterop": true
     },

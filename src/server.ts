@@ -1,18 +1,18 @@
-import express, {Application, Request, Response} from 'express';
+import express, {Application, Request, Response} from 'express'
 
-const app: Application = express();
-const httpServer = require("http").createServer(app);
-import {ClipboardCollection} from "./ClipboardCollection";
+const app: Application = express()
+const httpServer = require("http").createServer(app)
+import {ClipboardCollection} from "./ClipboardCollection"
 const options = {
     allowEIO3: true
 };
-const io = require("socket.io")(httpServer, options);
+const io = require("socket.io")(httpServer, options)
 
 // App setup
 const PORT = 5099;
 const server = httpServer.listen(PORT, function () {
-  console.log(`Listening on port ${PORT}`);
-  console.log(`http://localhost:${PORT}`);
+  console.log(`Listening on port ${PORT}`)
+  console.log(`http://localhost:${PORT}`)
 });
 
 // Static files
@@ -39,7 +39,7 @@ app.get('/api/clipboards/:id', function (req: Request, res: Response) {
   }
 });
 app.put('/api/clipboards/:id', function (req: Request, res: Response) {
-    console.log("Update clipboard %d", req.params.id);
+    console.log("Update clipboard %s", req.params.id);
     console.log(req.body);
     clipboards.update(req.params.id, req.body.text);
     res.send({params: req.params, body: req.body});
