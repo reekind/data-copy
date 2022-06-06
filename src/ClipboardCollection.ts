@@ -26,7 +26,7 @@ export class ClipboardCollection {
         if (this.clipboards.has(id)) {
             return this.clipboards.get(id);
         } else {
-            return false;
+            return null;
         }
     }
     

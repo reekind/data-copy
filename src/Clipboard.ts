@@ -1,5 +1,5 @@
 export class Clipboard {
-    private id: string;
+    public id: string;
     private _text: string;
 
     constructor(id: string) {
