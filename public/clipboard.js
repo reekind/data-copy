@@ -49,3 +49,7 @@ document.getElementById('save').addEventListener('click', () => {
         console.log(res);
     });
 });
+
+document.getElementById('copyLink').addEventListener('click', () => {
+    alert(window.location);
+});
