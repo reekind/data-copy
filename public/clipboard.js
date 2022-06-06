@@ -35,7 +35,7 @@ socket.on('clipboard:update', function (data) {
 
     if (data.sender != browserId) {
         // Set updated info only for data which was not sent by us
-    document.getElementById('info-updated').classList.remove('hidden');
+        document.getElementById('info-updated').classList.remove('hidden');
     }
 });
 
@@ -51,10 +51,16 @@ document.getElementById('save').addEventListener('click', () => {
         }
     }).then((res) => {
         socket.emit("clipboard:update", clipboardUpdate);
-        console.log(res);
+        createToast('Updated', 'Clipboard content updated');
     });
 });
 
 document.getElementById('copyLink').addEventListener('click', () => {
-    alert(window.location);
+    navigator.clipboard.writeText(window.location)
+    .then(() => {
+        createToast('Copied to clipboard', 'Clipboard content copied');
+    })
+    .catch(err => {
+        console.log('Something went wrong', err);
+    })
 });
