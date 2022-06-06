@@ -1,4 +1,11 @@
+import { unlinkSync } from "fs";
 import {ClipboardCollection} from "../out/ClipboardCollection";
+
+test('open not existing collection', () => {
+  const clipboardsOther: ClipboardCollection = ClipboardCollection.init('otherstorage.json');
+  expect(clipboardsOther.count()).toEqual(0);
+  unlinkSync('otherstorage.json');
+});
 
 const clipboards: ClipboardCollection = ClipboardCollection.init();
 

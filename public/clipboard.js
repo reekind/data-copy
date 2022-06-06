@@ -32,20 +32,25 @@ socket.on('clipboard:join', function (data) {
 
 socket.on('clipboard:update', function (data) {
     console.log(data + ' update');
+
+    if (data.sender != browserId) {
+        // Set updated info only for data which was not sent by us
     document.getElementById('info-updated').classList.remove('hidden');
+    }
 });
 
 // Save new Content
 document.getElementById('save').addEventListener('click', () => {
     const clipboardContent = document.getElementById('text').value;
+    const clipboardUpdate = { sender: browserId, id: clipboardId, text: clipboardContent };
     fetch('/api/clipboards/' + clipboardId, {
         method: 'PUT',
-        body: JSON.stringify({ id: clipboardId, text: clipboardContent }),
+        body: JSON.stringify(clipboardUpdate),
         headers: {
             'Content-Type': 'application/json'
         }
     }).then((res) => {
-        socket.emit("clipboard:update", clipboardId);
+        socket.emit("clipboard:update", clipboardUpdate);
         console.log(res);
     });
 });

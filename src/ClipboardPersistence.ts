@@ -1,13 +1,13 @@
 import { ClipboardCollection } from "./ClipboardCollection";
 import { Clipboard } from "./Clipboard";
-import { writeFile, promises, readFileSync, writeFileSync } from 'fs';
+import { writeFile, promises, readFileSync, writeFileSync, fstat, existsSync } from 'fs';
 
 export class ClipboardPersistence {
     private filePath: string;
 
     constructor(filePath: string) {
         this.filePath = filePath;
-    }
+    }   
 
     /*async save(data: ClipboardCollection) {
         const jsonString = data.toJSON();
@@ -30,7 +30,7 @@ export class ClipboardPersistence {
     }*/
 
     read() : Map<String, Clipboard> {
-        try {
+        if (existsSync(this.filePath)) {
             const data = readFileSync(this.filePath);
             const jsonString = data.toString();
             const jsonObject = JSON.parse(jsonString);
@@ -39,7 +39,8 @@ export class ClipboardPersistence {
                 map.set(value, jsonObject[value]);
             }
             return map;
-        } catch (error) {
+        } else {
+            writeFileSync(this.filePath, "{}");
             return new Map<String, Clipboard>();
         }
     }

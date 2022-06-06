@@ -9,10 +9,14 @@ export class ClipboardCollection {
         this.persistence = persistence
     }
 
-    static init() {
-        const persistence = new ClipboardPersistence('storage.json');
+    static init(filePath = 'storage.json') {
+        const persistence = new ClipboardPersistence(filePath);
         const clipboards = persistence.read();
         return new ClipboardCollection(persistence, clipboards);
+    }
+
+    count() {
+        return this.clipboards.size;
     }
     /**
      * Get clipboard via id
